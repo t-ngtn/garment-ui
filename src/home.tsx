@@ -1,4 +1,4 @@
-import { Image, Stage, Rect, Layer } from "react-konva"
+import { Image, Stage, Rect, Layer, Line } from "react-konva"
 import useImage from "use-image"
 import { useState } from "react"
 import body0 from "./images/body0.png"
@@ -11,12 +11,27 @@ function Home() {
   const bodyImages = [body0, body1, body2, body3, body4]
   const [currentIndex, setCurrentIndex] = useState(0)
   const [image, status] = useImage(bodyImages[currentIndex])
+  const [pos, setPos] = useState({ x: 0, y: 0 })
 
   const nextImage = () =>
     setCurrentIndex((currentIndex + 1) % bodyImages.length)
 
   const prevImage = () =>
     setCurrentIndex((currentIndex - 1 + bodyImages.length) % bodyImages.length)
+
+  const handleDragStart = (e: any) => {
+    setPos({
+      x: e.evt.clientX - e.target.attrs.x,
+      y: e.evt.clientY - e.target.attrs.y,
+    })
+  }
+
+  const handleDragMove = (e: any) => {
+    setPos({
+      x: e.evt.clientX - pos.x,
+      y: e.evt.clientY - pos.y,
+    })
+  }
 
   const stageWidth = 600
   const stageHeight = 600
@@ -52,14 +67,37 @@ function Home() {
             height={stageHeight - 10}
           />
         </Layer>
-        <Layer>
+        <Layer
+          x={pos.x}
+          y={pos.y}
+          onContentMouseDown={handleDragStart}
+          onContentMouseMove={handleDragMove}
+          draggable
+        >
+          <Line
+            points={[245, 130, 345, 130, 345, 280, 245, 280]}
+            closed={true}
+            stroke="red"
+            strokeWidth={4}
+          />
           <Rect
             stroke="red"
             strokeWidth={4}
             x={245}
             y={130}
-            width={100}
+            width={50}
             height={150}
+            rotation={30}
+          />
+          <Rect
+            stroke="red"
+            strokeWidth={4}
+            x={345}
+            y={130}
+            width={50}
+            height={150}
+            rotation={-30}
+            offset={{ x: 50, y: 0 }}
           />
         </Layer>
       </Stage>
