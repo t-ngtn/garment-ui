@@ -14,7 +14,10 @@ import {
   Button,
   AppBar,
   Toolbar,
+  IconButton,
+  Link,
 } from "@mui/material"
+import GitHubIcon from "@mui/icons-material/GitHub"
 
 function Home() {
   const bodyImages = [body0, body1, body2, body3, body4]
@@ -64,6 +67,20 @@ function Home() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Tシャツサイズ調整アプリ
           </Typography>
+          <Link
+            href="https://github.com/t-ngtn/garment-ui"
+            target="_blank"
+            rel="noopener"
+          >
+            <IconButton
+              size="large"
+              aria-label="move to GitHub repository"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
       <Box
