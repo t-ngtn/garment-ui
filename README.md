@@ -7,3 +7,17 @@ deploy -> https://t-ngtn.github.io/garment-ui/
 - react
 - mui
 - canvas(react-konva)
+
+## use
+
+ready
+
+```
+yarn install
+```
+
+start
+
+```
+yarn start
+```
